@@ -1,0 +1,6 @@
+package com.happybananas.tracezilla.shopify;
+import com.fasterxml.jackson.databind.JsonNode; import com.happybananas.tracezilla.shared.*; import java.util.*;
+public final class ShopifyCatalog implements CatalogReader {
+  private final ShopifyClient client; public ShopifyCatalog(ShopifyClient client){this.client=client;}
+  public List<CatalogItem> read() throws Exception { var items=new ArrayList<CatalogItem>(); String after=null; do { var variables=new HashMap<String,Object>();variables.put("first",250);variables.put("after",after); var connection=client.graphql(GetProductVariants.DOCUMENT,variables).path("data").path("productVariants"); if(!connection.path("nodes").isArray())throw new IllegalStateException("Shopify response is missing productVariants."); for(JsonNode value:connection.path("nodes")){var sku=value.path("sku").asText("").trim();if(!sku.isEmpty()){var id=value.path("id").asText("");if(id.isEmpty())throw new IllegalStateException("A Shopify variant is missing its ID.");items.add(new CatalogItem(sku,id,value.path("displayName").asText(null)));}} if(!connection.path("pageInfo").path("hasNextPage").asBoolean())break; after=connection.path("pageInfo").path("endCursor").asText("");if(after.isEmpty())throw new IllegalStateException("Shopify pagination is missing an end cursor."); }while(true);return items; }
+}

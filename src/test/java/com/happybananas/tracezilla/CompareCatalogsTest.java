@@ -1,0 +1,3 @@
+package com.happybananas.tracezilla;
+import com.happybananas.tracezilla.shared.*;import com.happybananas.tracezilla.workflow.*;import org.junit.jupiter.api.Test;import java.util.*;import static org.junit.jupiter.api.Assertions.*;
+final class CompareCatalogsTest {@Test void comparesCatalogs()throws Exception{CatalogReader left=()->List.of(new CatalogItem("B","B",null),new CatalogItem("A","A",null));CatalogReader right=()->List.of(new CatalogItem("A","A",null),new CatalogItem("C","C",null));var result=new CompareCatalogs(left,right).run(10);assertEquals(List.of("A"),result.presentInBoth());assertEquals(List.of("B"),result.onlyInShopify());assertEquals(List.of("C"),result.onlyInTracezilla());assertEquals("differences",result.status());}}
