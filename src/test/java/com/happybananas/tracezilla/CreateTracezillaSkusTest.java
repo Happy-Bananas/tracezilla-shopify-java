@@ -1,0 +1,1 @@
+package com.happybananas.tracezilla;import org.junit.jupiter.api.Test;import static org.junit.jupiter.api.Assertions.*;class CreateTracezillaSkusTest{@Test void mappingAssumptionsAreVisible(){assertEquals("pcs","pcs");assertEquals("colli","colli");}}

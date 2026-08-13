@@ -20,6 +20,13 @@ docker compose run --rm app --limit=25
 docker compose run --rm app --json
 ```
 
+Preview or explicitly create missing tracezilla SKUs:
+
+```bash
+docker compose run --rm app create-tracezilla-skus --limit=10
+docker compose run --rm app create-tracezilla-skus --execute --confirm --limit=1
+```
+
 The complete catalogs are compared by SKU code. The display limit defaults to
 10 and does not affect comparison totals. Differences return exit code `0`;
 configuration and API failures return a non-zero code. No data is written.
