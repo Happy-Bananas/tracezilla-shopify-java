@@ -31,6 +31,13 @@ The complete catalogs are compared by SKU code. The display limit defaults to
 10 and does not affect comparison totals. Differences return exit code `0`;
 configuration and API failures return a non-zero code. No data is written.
 
+List all Shopify locations (read-only):
+
+```bash
+docker compose run --rm app list-shopify-locations
+docker compose run --rm app list-shopify-locations --json
+```
+
 ## Tests
 
 Java and Maven do not need to be installed on the host:

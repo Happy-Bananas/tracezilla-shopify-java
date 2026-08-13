@@ -1,0 +1,3 @@
+package com.happybananas.tracezilla;
+import com.fasterxml.jackson.databind.ObjectMapper;import com.happybananas.tracezilla.shopify.ShopifyLocationService;import org.junit.jupiter.api.Test;import static org.junit.jupiter.api.Assertions.*;
+class ShopifyLocationsTest {@Test void mapsLocation() throws Exception {var node=new ObjectMapper().readTree("{\"id\":\"gid://shopify/Location/1\",\"legacyResourceId\":\"1\",\"name\":\"Development Warehouse\",\"isActive\":true,\"hasActiveInventory\":true,\"fulfillsOnlineOrders\":true,\"address\":{\"city\":\"Copenhagen\"}}");var result=ShopifyLocationService.map(node);assertEquals("Development Warehouse",result.name());assertTrue(result.isActive());}}
